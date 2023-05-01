@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    Accent colors-->
+    <color name="laurel">#6D9674</color>
+    <color name="asparagus">#8C9F5F</color>
+
+    <!--    For hint text and disabled icons-->
+    <color name="quill_gray">#DCDCDA</color>
+    <color name="white_rock">#F0ECE1</color>
+    <color name="concrete">#F2F2F2</color>
+
+    <!--    For edit text background-->
+    <color name="snow_drift">#f8faf9</color>
+
 </resources>
