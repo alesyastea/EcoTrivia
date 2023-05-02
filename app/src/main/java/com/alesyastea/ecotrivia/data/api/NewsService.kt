@@ -1,6 +1,8 @@
 package com.alesyastea.ecotrivia.data.api
 
+import com.alesyastea.ecotrivia.models.NewsResponse
 import com.alesyastea.ecotrivia.utils.Constants.API_KEY
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,13 +14,12 @@ interface NewsService {
         @Query("searchIn") searchIn: String,
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = API_KEY
-    )
+    ): Response<NewsResponse>
 
+    @GET("/v2/top-headlines")
     suspend fun getHeadlines(
-        @Query("q") query: String = "ecology",
-        @Query("searchIn") searchIn: String = "title,description",
-        @Query("country") country: String = "pl",
+        @Query("country") country: String = "us",
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = API_KEY
-    )
+    ): Response<NewsResponse>
 }

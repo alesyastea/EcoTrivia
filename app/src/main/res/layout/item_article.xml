@@ -12,6 +12,7 @@
         android:layout_width="88dp"
         android:layout_height="84dp"
         android:scaleType="centerCrop"
+        android:background="@drawable/bg_image_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -44,7 +45,7 @@
             android:textColor="@color/shark"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textFontWeight="700"
+            app:fontWeight="700"
             tools:text="Title text of simple EcoNews"/>
         
     </LinearLayout>
