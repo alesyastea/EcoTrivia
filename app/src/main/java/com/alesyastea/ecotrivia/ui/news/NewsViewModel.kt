@@ -1,4 +1,4 @@
-package com.alesyastea.ecotrivia.ui
+package com.alesyastea.ecotrivia.ui.news
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

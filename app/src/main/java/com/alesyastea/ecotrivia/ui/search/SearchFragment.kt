@@ -1,40 +1,60 @@
-package com.alesyastea.ecotrivia.ui
+package com.alesyastea.ecotrivia.ui.search
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alesyastea.ecotrivia.databinding.FragmentNewsBinding
+import com.alesyastea.ecotrivia.databinding.FragmentSearchBinding
 import com.alesyastea.ecotrivia.ui.adapters.NewsAdapter
 import com.alesyastea.ecotrivia.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class NewsFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private var _binding: FragmentNewsBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val mBinding get() = _binding!!
 
-    private val viewModel by viewModels<NewsViewModel>()
+    private val viewModel by viewModels<SearchViewModel>()
     lateinit var newsAdapter: NewsAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNewsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        viewModel.newsLiveData.observe(viewLifecycleOwner) { response ->
-            when(response) {
+        var job: Job? = null
+        mBinding.etSearch.addTextChangedListener{ text: Editable? ->
+            job?.cancel()
+            job = MainScope().launch {
+                delay(500L)
+                text?.let {
+                    if(it.toString().isNotEmpty()) {
+                        viewModel.getSearchNews(query = it.toString())
+                    }
+                }
+            }
+        }
+
+
+        viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Resource.Success -> {
                     mBinding.progressBar.visibility = View.INVISIBLE
                     response.data?.let {
@@ -44,7 +64,7 @@ class NewsFragment : Fragment() {
                 is Resource.Error -> {
                     mBinding.progressBar.visibility = View.INVISIBLE
                     response.data?.let {
-                        Log.e("CheckData", "NewsFragment: error: ${it}")
+                        Log.e("CheckData", "SearchNewsFragment: error: ${it}")
                     }
                 }
                 is Resource.Loading -> {
