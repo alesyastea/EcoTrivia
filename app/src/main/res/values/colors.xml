@@ -13,8 +13,11 @@
     <color name="asparagus">#8C9F5F</color>
     <color name="ash_grey">#C7D0B3</color>
 
-    <!--    For hint text and disabled icons-->
+    <!--    For text-->
+    <color name="shark">#262627</color>
     <color name="stack">#8B8B8B</color>
+
+    <!--    For hint text and disabled icons-->
     <color name="quill_gray">#DCDCDA</color>
     <color name="white_rock">#F0ECE1</color>
     <color name="concrete">#F2F2F2</color>
