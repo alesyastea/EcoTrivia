@@ -50,6 +50,10 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.NewsViewHolder>()  {
             binding.articleImg.clipToOutline = true
             binding.articleTitle.text = article.title
             binding.articleDate.text = article.publishedAt
+
+            setOnClickListener {
+                onItemClickListener?.let { it(article) }
+            }
         }
     }
 

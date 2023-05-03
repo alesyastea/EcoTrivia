@@ -1,7 +1,11 @@
 package com.alesyastea.ecotrivia
 
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alesyastea.ecotrivia.databinding.ActivityMainBinding
@@ -18,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = Color.TRANSPARENT
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.fragment_splash)
 
@@ -29,6 +34,4 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
-
 }

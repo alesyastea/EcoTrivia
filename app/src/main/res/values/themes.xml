@@ -10,6 +10,7 @@
         <item name="colorSecondaryContainer">@color/ash_grey</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

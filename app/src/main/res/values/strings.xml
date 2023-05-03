@@ -2,5 +2,7 @@
     <string name="app_name">EcoTrivia</string>
     <string name="popular_news">Popular News</string>
     <string name="search">Search</string>
-    <string name="search_et_hint">Ozone layer</string>
+    <string name="search_et_hint">Search topics</string>
+    <string name="description">Description</string>
+    <string name="visit_site">Visit site</string>
 </resources>

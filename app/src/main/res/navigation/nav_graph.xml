@@ -22,7 +22,11 @@
         android:id="@+id/newsDetailsFragment"
         android:name="com.alesyastea.ecotrivia.ui.NewsDetailsFragment"
         android:label="fragment_news_details"
-        tools:layout="@layout/fragment_news_details" />
+        tools:layout="@layout/fragment_news_details" >
+        <argument
+            android:name="article"
+            app:argType="com.alesyastea.ecotrivia.models.NewsResponse$Article" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.alesyastea.ecotrivia.ui.FavoriteFragment"
