@@ -17,13 +17,13 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository):
     var newsPage = 1
 
     init {
-        getNews("us")
+        getSearchNews("ecology")
     }
 
-    private fun getNews(countryCode: String) =
+    private fun getSearchNews(q: String) =
         viewModelScope.launch {
             newsLiveData.postValue(Resource.Loading())
-            val response = repository.getNews(countryCode = countryCode, pageNumber = newsPage)
+            val response = repository.getSearchNews(query = q, pageNumber = newsPage)
             if (response.isSuccessful) {
                 response.body().let { res ->
                     newsLiveData.postValue(Resource.Success(res))

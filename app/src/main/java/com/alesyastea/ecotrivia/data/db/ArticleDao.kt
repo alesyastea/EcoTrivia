@@ -1,16 +1,14 @@
 package com.alesyastea.ecotrivia.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.alesyastea.ecotrivia.models.NewsResponse
 
+@Dao
 interface ArticleDao {
 
     @Query("SELECT * FROM articles")
-    suspend fun getAllArticles(): LiveData<List<NewsResponse.Article>>
+    fun getAllArticles(): List<NewsResponse.Article>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: NewsResponse.Article)

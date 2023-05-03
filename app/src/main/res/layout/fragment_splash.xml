@@ -5,19 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/asparagus"
-    tools:context=".ui.SplashFragment">
+    tools:context=".ui.splash.SplashFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="64sp"
-        android:fontFamily="@font/poppins"
-        android:textStyle="bold"
+        android:src="@drawable/logo_light"
+        android:paddingHorizontal="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/app_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

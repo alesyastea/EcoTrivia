@@ -1,22 +1,22 @@
-package com.alesyastea.ecotrivia.ui
+package com.alesyastea.ecotrivia.ui.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alesyastea.ecotrivia.databinding.FragmentSplashBinding
+import com.alesyastea.ecotrivia.databinding.FragmentFavoriteBinding
 
 
-class SplashFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private var _binding: FragmentSplashBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
     private val mBinding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 

@@ -33,6 +33,7 @@ class NewsFragment : Fragment() {
         _binding = FragmentNewsBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
@@ -56,7 +57,7 @@ class NewsFragment : Fragment() {
                 is Resource.Error -> {
                     mBinding.progressBar.visibility = View.INVISIBLE
                     response.data?.let {
-                        Log.e("CheckData", "NewsFragment: error: ${it}")
+                        Log.e("CheckData", "!!!NewsFragment: error: ${it}")
                     }
                 }
                 is Resource.Loading -> {
