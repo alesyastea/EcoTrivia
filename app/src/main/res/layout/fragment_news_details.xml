@@ -22,7 +22,8 @@
                 android:id="@+id/header_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
+
             <ImageView
                 android:id="@+id/ic_back"
                 android:layout_width="wrap_content"
@@ -35,23 +36,13 @@
 
             <ImageView
                 android:id="@+id/ic_favorite"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_favorite"
-                android:layout_marginBottom="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginEnd="17dp"
-                app:layout_constraintEnd_toStartOf="@+id/ic_share"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            
-            <ImageView
-                android:id="@+id/ic_share"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_share"
                 android:layout_marginBottom="18dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,64 +52,73 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="17dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins"
         android:textColor="@color/shark"
-        tools:text="Any News about ecology"
-        app:layout_constraintTop_toBottomOf="@id/header_card"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/header_card"
+        tools:text="Any News about ecology" />
 
     <TextView
         android:id="@+id/article_decription_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="13dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/description"
+        android:textColor="@color/shark"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/shark"
-        android:text="@string/description"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <TextView
-        android:id="@+id/article_description"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14sp"
-        android:layout_marginHorizontal="13dp"
-        android:textSize="12sp"
-        android:fontFamily="@font/lora"
-        android:textColor="@color/shark"
-        android:lineHeight="19sp"
-        tools:text="Any text"
-        app:layout_constraintTop_toBottomOf="@id/article_decription_title"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/article_decription_title">
 
-    <Button
-        android:id="@+id/btn_to_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/visit_site"
-        android:textColor="@color/white"
-        android:fontFamily="@font/poppins"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:backgroundTint="@color/asparagus"
-        app:layout_constraintTop_toBottomOf="@id/article_description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
+            <TextView
+                android:id="@+id/article_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginTop="14sp"
+                android:fontFamily="@font/lora"
+                android:lineHeight="19sp"
+                android:textColor="@color/shark"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Any text" />
 
-
-
-
+            <Button
+                android:id="@+id/btn_to_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="@color/asparagus"
+                android:fontFamily="@font/poppins"
+                android:text="@string/visit_site"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/article_description" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

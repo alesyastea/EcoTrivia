@@ -3,16 +3,17 @@ package com.alesyastea.ecotrivia.ui.details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentNewsDetailsBinding
+import com.alesyastea.ecotrivia.utils.Constants.ARTICLE_URL
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +30,7 @@ class NewsDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNewsDetailsBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
@@ -40,7 +41,8 @@ class NewsDetailsFragment : Fragment() {
 
         articleArg.let { article ->
             article.urlToImage.let {
-                Glide.with(this).load(article.urlToImage).into(mBinding.headerImage)
+                Glide.with(this).load(article.urlToImage).placeholder(R.drawable.news_placeholder)
+                    .into(mBinding.headerImage)
             }
             mBinding.headerImage.clipToOutline = true
             mBinding.tvTitle.text = article.title
@@ -54,21 +56,23 @@ class NewsDetailsFragment : Fragment() {
                         .setData(Uri.parse(takeIf { URLUtil.isValidUrl(article.url) }
                             ?.let {
                                 article.url
-                            } ?: "https://google.com"))
+                            } ?: ARTICLE_URL))
                         .let {
                             ContextCompat.startActivity(requireContext(), it, null)
                         }
                 } catch (e: Exception) {
                     Toast.makeText(
                         context,
-                        "The device doesn't have any browser to view the document!",
+                        R.string.no_browser,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
             mBinding.icFavorite.setOnClickListener {
                 viewModel.saveFavoriteArticle(article)
-
+            }
+            mBinding.icBack.setOnClickListener {
+                findNavController().navigateUp()
             }
         }
     }

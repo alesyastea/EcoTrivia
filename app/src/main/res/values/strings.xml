@@ -4,6 +4,7 @@
     <string name="search">Search</string>
     <string name="search_et_hint">Search topics</string>
     <string name="description">Description</string>
-    <string name="visit_site">Visit site</string>
+    <string name="visit_site">Read full news</string>
     <string name="app_logo">App logo</string>
+    <string name="no_browser">The device doesn\'t have any browser to view the document!</string>
 </resources>

@@ -1,11 +1,8 @@
 package com.alesyastea.ecotrivia
 
 import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alesyastea.ecotrivia.databinding.ActivityMainBinding

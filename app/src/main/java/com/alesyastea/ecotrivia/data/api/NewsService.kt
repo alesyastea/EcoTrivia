@@ -11,6 +11,7 @@ interface NewsService {
     @GET("/v2/everything")
     suspend fun getAll (
         @Query("q") query: String = "ecology",
+        @Query("language") language: String = "en",
         @Query("sortBy") sortBy: String = "publishedAt",
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = API_KEY
