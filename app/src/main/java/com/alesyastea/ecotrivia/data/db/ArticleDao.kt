@@ -8,7 +8,7 @@ import com.alesyastea.ecotrivia.models.NewsResponse
 interface ArticleDao {
 
     @Query("SELECT * FROM articles")
-    fun getAllArticles(): List<NewsResponse.Article>
+    fun getAllArticles(): LiveData<List<NewsResponse.Article>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: NewsResponse.Article)

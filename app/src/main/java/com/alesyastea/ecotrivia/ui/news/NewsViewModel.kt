@@ -17,7 +17,7 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository):
     var newsPage = 1
 
     init {
-        getSearchNews("eco")
+        getSearchNews("environment")
     }
 
     private fun getSearchNews(query: String) =
@@ -32,5 +32,4 @@ class NewsViewModel @Inject constructor(private val repository: NewsRepository):
                 newsLiveData.postValue(Resource.Error(message = response.message()))
             }
         }
-
 }

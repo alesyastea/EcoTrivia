@@ -1,4 +1,4 @@
-package com.alesyastea.ecotrivia.ui.details
+package com.alesyastea.ecotrivia.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,15 +10,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewsDetailsViewModel @Inject constructor(private val repository: NewsRepository): ViewModel(){
+class FavoriteViewModel @Inject constructor(private val repository: NewsRepository): ViewModel(){
 
-    init {
-        getSavedArticles()
-    }
+    fun getSavedArticles() = repository.getFavoriteArticles()
 
-    fun getSavedArticles() = viewModelScope.launch(Dispatchers.IO) {
-        repository.getFavoriteArticles()
-    }
 
     fun saveFavoriteArticle(article: NewsResponse.Article) = viewModelScope.launch (Dispatchers.IO) {
         repository.addToFavorite(article = article)
@@ -27,4 +22,5 @@ class NewsDetailsViewModel @Inject constructor(private val repository: NewsRepos
     fun deleteArticle(article: NewsResponse.Article) = viewModelScope.launch (Dispatchers.IO) {
         repository.deleteFromFavorite(article = article)
     }
+
 }

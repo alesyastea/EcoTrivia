@@ -24,7 +24,6 @@ class NewsDetailsFragment : Fragment() {
     private var _binding: FragmentNewsDetailsBinding? = null
     private val mBinding get() = _binding!!
     private val bundleArgs: NewsDetailsFragmentArgs by navArgs()
-
     private val viewModel by viewModels<NewsDetailsViewModel>()
 
     override fun onCreateView(

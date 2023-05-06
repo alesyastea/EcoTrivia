@@ -7,4 +7,7 @@
     <string name="visit_site">Read full news</string>
     <string name="app_logo">App logo</string>
     <string name="no_browser">The device doesn\'t have any browser to view the document!</string>
+    <string name="favorite_news">Favorite News</string>
+    <string name="delete_article">Successfully deleted article</string>
+    <string name="undo">Undo</string>
 </resources>
