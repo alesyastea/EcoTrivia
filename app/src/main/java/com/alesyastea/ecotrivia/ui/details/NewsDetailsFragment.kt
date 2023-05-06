@@ -25,6 +25,7 @@ class NewsDetailsFragment : Fragment() {
     private val mBinding get() = _binding!!
     private val bundleArgs: NewsDetailsFragmentArgs by navArgs()
     private val viewModel by viewModels<NewsDetailsViewModel>()
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +39,28 @@ class NewsDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val articleArg = bundleArgs.article
 
+        mBinding.icFavorite.setOnClickListener {
+            if (isFavorite) {
+                viewModel.deleteArticle(articleArg)
+            } else {
+                viewModel.saveFavoriteArticle(articleArg)
+            }
+            isFavorite = !isFavorite
+            updateFavoriteIcon()
+        }
+
+        viewModel.getSavedArticles().observe(viewLifecycleOwner) { savedArticles ->
+            savedArticles?.let {
+                val savedArticle = it.find { it.url == articleArg.url }
+                isFavorite = savedArticle?.isFavorite ?: false
+                updateFavoriteIcon()
+            }
+        }
+
         articleArg.let { article ->
             article.urlToImage.let {
-                Glide.with(this).load(article.urlToImage).placeholder(R.drawable.news_placeholder)
+                Glide.with(this).load(article.urlToImage)
+                    .placeholder(R.drawable.news_placeholder)
                     .into(mBinding.headerImage)
             }
             mBinding.headerImage.clipToOutline = true
@@ -67,13 +87,13 @@ class NewsDetailsFragment : Fragment() {
                     ).show()
                 }
             }
-            mBinding.icFavorite.setOnClickListener {
-                viewModel.saveFavoriteArticle(article)
-            }
-            mBinding.icBack.setOnClickListener {
-                findNavController().navigateUp()
-            }
+        }
+        mBinding.icBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
-
+    private fun updateFavoriteIcon() {
+        val iconRes = if (isFavorite) R.drawable.ic_favorite_added else R.drawable.ic_favorite_empty
+        mBinding.icFavorite.setImageResource(iconRes)
+    }
 }

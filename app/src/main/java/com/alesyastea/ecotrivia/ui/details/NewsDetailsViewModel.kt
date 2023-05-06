@@ -16,9 +16,9 @@ class NewsDetailsViewModel @Inject constructor(private val repository: NewsRepos
         getSavedArticles()
     }
 
-    fun getSavedArticles() = viewModelScope.launch(Dispatchers.IO) {
+    fun getSavedArticles() =
         repository.getFavoriteArticles()
-    }
+
 
     fun saveFavoriteArticle(article: NewsResponse.Article) = viewModelScope.launch (Dispatchers.IO) {
         repository.addToFavorite(article = article)
@@ -27,4 +27,5 @@ class NewsDetailsViewModel @Inject constructor(private val repository: NewsRepos
     fun deleteArticle(article: NewsResponse.Article) = viewModelScope.launch (Dispatchers.IO) {
         repository.deleteFromFavorite(article = article)
     }
+
 }

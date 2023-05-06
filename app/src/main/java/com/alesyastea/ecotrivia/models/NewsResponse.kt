@@ -31,6 +31,7 @@ data class  NewsResponse(
         @SerializedName("url")
         val url: String?,
         @SerializedName("urlToImage")
-        val urlToImage: String?
+        val urlToImage: String?,
+        var isFavorite: Boolean = false
     ): Serializable
 }

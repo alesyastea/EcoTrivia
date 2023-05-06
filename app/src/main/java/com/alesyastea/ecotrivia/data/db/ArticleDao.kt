@@ -15,4 +15,7 @@ interface ArticleDao {
 
     @Delete
     suspend fun delete(article: NewsResponse.Article)
+
+    @Update
+    suspend fun update(article: NewsResponse.Article)
 }
