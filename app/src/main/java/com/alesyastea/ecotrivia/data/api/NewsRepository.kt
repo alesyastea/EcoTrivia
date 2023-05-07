@@ -9,8 +9,8 @@ class NewsRepository @Inject constructor(
     private val articleDao: ArticleDao
 ) {
 
-    suspend fun getSearchNews(query: String, pageNumber: Int) =
-        newsService.getAll(query = query, page = pageNumber)
+    suspend fun getSearchNews(query: String, language: String, pageNumber: Int) =
+        newsService.getAll(query = query, language = language, page = pageNumber)
 
     fun getFavoriteArticles() = articleDao.getAllArticles()
 

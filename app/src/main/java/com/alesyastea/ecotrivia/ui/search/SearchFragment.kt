@@ -21,6 +21,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -52,7 +53,11 @@ class SearchFragment : Fragment() {
                 delay(500L)
                 text?.let {
                     if(it.toString().isNotEmpty()) {
-                        viewModel.getSearchNews(query = it.toString())
+                        if(Locale.getDefault().language == "ru") {
+                            viewModel.getSearchNews(query = it.toString(), language = "ru")
+                        } else {
+                            viewModel.getSearchNews(query = it.toString(), language = "en")
+                        }
                     }
                 }
             }

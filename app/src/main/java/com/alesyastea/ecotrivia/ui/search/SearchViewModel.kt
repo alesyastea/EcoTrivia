@@ -9,6 +9,7 @@ import com.alesyastea.ecotrivia.models.NewsResponse
 import com.alesyastea.ecotrivia.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,13 +19,17 @@ class SearchViewModel @Inject constructor(private val repository: NewsRepository
     var searchNewsPage = 1
 
     init {
-       getSearchNews("")
+        if (Locale.getDefault().language == "ru") {
+            getSearchNews("", "ru")
+        } else {
+            getSearchNews("", "en")
+        }
     }
 
-    fun getSearchNews(query: String) =
+    fun getSearchNews(query: String, language: String) =
         viewModelScope.launch {
             searchNewsLiveData.postValue(Resource.Loading())
-            val response = repository.getSearchNews(query = query, pageNumber = searchNewsPage)
+            val response = repository.getSearchNews(query = query, language = language, pageNumber = searchNewsPage)
             if (response.isSuccessful) {
                 response.body().let { res ->
                     searchNewsLiveData.postValue(Resource.Success(res))

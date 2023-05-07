@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">EcoTrivia</string>
+    <string name="popular_news">Популярные новости</string>
+    <string name="search">Поиск</string>
+    <string name="search_et_hint">Поисковый запрос</string>
+    <string name="description">Описание</string>
+    <string name="visit_site">Читайте полную версию</string>
+    <string name="app_logo">App logo</string>
+    <string name="no_browser">На устройстве отсутсвует браузер для просмотра документа</string>
+    <string name="favorite_news">Избранное</string>
+    <string name="delete_article">Статья успешно удалена</string>
+    <string name="undo">Отменить</string>
+    <string name="battery_text">&#160;%1$d%% оставшийся заряд батареи</string>
+</resources>
