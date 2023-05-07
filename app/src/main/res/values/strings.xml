@@ -10,4 +10,5 @@
     <string name="favorite_news">Favorite News</string>
     <string name="delete_article">Successfully deleted article</string>
     <string name="undo">Undo</string>
+    <string name="battery_text">&#160;%1$d%% battery remaining</string>
 </resources>
