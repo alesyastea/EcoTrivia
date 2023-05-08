@@ -7,14 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentSearchBinding
 import com.alesyastea.ecotrivia.ui.adapters.NewsAdapter
+import com.alesyastea.ecotrivia.utils.Constants
+import com.alesyastea.ecotrivia.utils.Constants.ENGLISH_LANGUAGE
+import com.alesyastea.ecotrivia.utils.Constants.RUSSIAN_LANGUAGE
 import com.alesyastea.ecotrivia.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -53,10 +60,10 @@ class SearchFragment : Fragment() {
                 delay(500L)
                 text?.let {
                     if(it.toString().isNotEmpty()) {
-                        if(Locale.getDefault().language == "ru") {
-                            viewModel.getSearchNews(query = it.toString(), language = "ru")
+                        if(Locale.getDefault().language == RUSSIAN_LANGUAGE) {
+                            viewModel.getSearchNews(query = it.toString(), language = RUSSIAN_LANGUAGE)
                         } else {
-                            viewModel.getSearchNews(query = it.toString(), language = "en")
+                            viewModel.getSearchNews(query = it.toString(), language = ENGLISH_LANGUAGE)
                         }
                     }
                 }
@@ -72,32 +79,79 @@ class SearchFragment : Fragment() {
         }
 
 
-        viewModel.searchNewsLiveData.observe(viewLifecycleOwner) { response ->
+        viewModel.searchNewsLiveData.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
-                    mBinding.progressBar.visibility = View.INVISIBLE
+                    hideProgressBar()
                     response.data?.let {
-                        newsAdapter.differ.submitList(it.articles)
+                        newsAdapter.differ.submitList(it.articles.toList())
+                        val totalPages = it.totalResults / Constants.QUERY_PAGE_SIZE + 2
+                        isLastPage = viewModel.searchNewsPage == totalPages
+                        if(isLastPage) {
+                            mBinding.recyclerView.setPadding(0, 0, 0, 0)
+                        }
                     }
                 }
                 is Resource.Error -> {
-                    mBinding.progressBar.visibility = View.INVISIBLE
-                    response.data?.let {
-                        Log.e("CheckData", "!!!SearchNewsFragment: error: ${it}")
+                    hideProgressBar()
+                    response.message?.let {
+                        Log.e("SearchNewsFragment", "!!! An error occured: $it")
                     }
                 }
                 is Resource.Loading -> {
-                    mBinding.progressBar.visibility = View.VISIBLE
+                    showProgressBar()
                 }
+            }
+        })
+    }
+
+    private fun hideProgressBar() {
+        mBinding.progressBar.visibility = View.INVISIBLE
+        isLoading = false
+    }
+    private fun showProgressBar() {
+        mBinding.progressBar.visibility = View.VISIBLE
+        isLoading = true
+    }
+    var isLoading = false
+    var isLastPage = false
+    var isScrolling = false
+
+    val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
+            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
+                    isTotalMoreThanVisible && isScrolling
+            if(shouldPaginate) {
+                if(Locale.getDefault().language == RUSSIAN_LANGUAGE) {
+                    viewModel.getSearchNews(mBinding.etSearch.text.toString(), RUSSIAN_LANGUAGE)
+                } else {
+                    viewModel.getSearchNews(mBinding.etSearch.text.toString(), ENGLISH_LANGUAGE)
+                }
+                isScrolling = false
+            }
+        }
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
             }
         }
     }
-
     private fun initAdapter() {
         newsAdapter = NewsAdapter()
         mBinding.recyclerView.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
+            addOnScrollListener(this@SearchFragment.scrollListener)
         }
     }
 }
