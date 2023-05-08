@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -83,6 +82,7 @@ class SearchFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
+                    hideErrorMessage()
                     response.data?.let {
                         newsAdapter.differ.submitList(it.articles.toList())
                         val totalPages = it.totalResults / Constants.QUERY_PAGE_SIZE + 2
@@ -96,6 +96,7 @@ class SearchFragment : Fragment() {
                     hideProgressBar()
                     response.message?.let {
                         Log.e("SearchNewsFragment", "!!! An error occured: $it")
+                        showErrorMessage()
                     }
                 }
                 is Resource.Loading -> {
@@ -103,6 +104,13 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+        mBinding.btnRetry.setOnClickListener {
+            if (mBinding.etSearch.text.toString().isNotEmpty()) {
+                viewModel.getSearchNews(mBinding.etSearch.text.toString(), ENGLISH_LANGUAGE)
+            } else {
+                hideErrorMessage()
+            }
+        }
     }
 
     private fun hideProgressBar() {
@@ -113,6 +121,18 @@ class SearchFragment : Fragment() {
         mBinding.progressBar.visibility = View.VISIBLE
         isLoading = true
     }
+
+    private fun hideErrorMessage() {
+        mBinding.noInternetLayout.visibility = View.INVISIBLE
+        isError = false
+    }
+
+    private fun showErrorMessage() {
+        mBinding.noInternetLayout.visibility = View.VISIBLE
+        isError = true
+    }
+
+    var isError = false
     var isLoading = false
     var isLastPage = false
     var isScrolling = false
@@ -124,11 +144,14 @@ class SearchFragment : Fragment() {
             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
             val visibleItemCount = layoutManager.childCount
             val totalItemCount = layoutManager.itemCount
+
+            val isNoErrors = !isError
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
             val isNotAtBeginning = firstVisibleItemPosition >= 0
             val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
-            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
+
+            val shouldPaginate = isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
                     isTotalMoreThanVisible && isScrolling
             if(shouldPaginate) {
                 if(Locale.getDefault().language == RUSSIAN_LANGUAGE) {

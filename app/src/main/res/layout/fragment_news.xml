@@ -23,13 +23,10 @@
         android:id="@+id/tv_popular_news"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TvBig"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="22dp"
-        android:fontFamily="@font/poppins"
         android:text="@string/popular_news"
-        android:textColor="@color/shark"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -44,6 +41,55 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_popular_news" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_internet_layout"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_image_10"
+        android:visibility="gone"
+        android:elevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_no_internet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TvBig"
+            android:layout_marginTop="22dp"
+            android:text="@string/oops"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_no_internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TvMedium"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/no_internet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_no_internet_title" />
+
+        <Button
+            android:id="@+id/btn_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Button"
+            android:layout_marginTop="12dp"
+            android:text="@string/retry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_no_internet" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar"

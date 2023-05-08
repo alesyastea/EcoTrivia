@@ -22,7 +22,8 @@
                 android:id="@+id/header_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/news_image" />
 
             <ImageView
                 android:id="@+id/ic_back"
@@ -32,7 +33,8 @@
                 android:layout_marginBottom="18dp"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/arrow_back" />
 
             <ImageView
                 android:id="@+id/ic_favorite"
@@ -42,7 +44,8 @@
                 android:layout_marginBottom="18dp"
                 android:src="@drawable/ic_favorite_empty"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/add_to_favorite" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,13 +112,9 @@
                 android:id="@+id/btn_to_source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Button"
                 android:layout_marginTop="40dp"
-                android:backgroundTint="@color/asparagus"
-                android:fontFamily="@font/poppins"
                 android:text="@string/visit_site"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/article_description" />

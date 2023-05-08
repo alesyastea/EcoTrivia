@@ -14,7 +14,8 @@
         android:scaleType="centerCrop"
         android:background="@drawable/bg_image_10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/news_image" />
 
     <LinearLayout
         android:id="@+id/article_info"
@@ -30,8 +31,7 @@
             android:id="@+id/article_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lora"
-            android:textColor="@color/shark"
+            style="@style/TvMedium"
             android:textSize="12sp"
             tools:text="Thu, Apr 19 – 20.00 PM"/>
         
@@ -39,25 +39,13 @@
             android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/TvBig"
             android:ellipsize="end"
             android:maxLines="3"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/shark"
             android:textSize="12sp"
-            android:textStyle="bold"
             app:fontWeight="700"
             tools:text="Title text of simple EcoNews"/>
         
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ic_favorite"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="42dp"
-        android:src="@drawable/ic_heart"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/article_info"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,4 +10,5 @@ object Constants {
     const val ENGLISH_LANGUAGE = "en"
     const val RUSSIAN_REQUEST = "экология"
     const val ENGLISH_REQUEST = "ecology"
+    const val EMPTY_STRING = ""
 }

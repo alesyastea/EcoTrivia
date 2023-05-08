@@ -4,15 +4,15 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.query
 import com.alesyastea.ecotrivia.data.api.NewsRepository
 import com.alesyastea.ecotrivia.di.NewsApp
 import com.alesyastea.ecotrivia.models.NewsResponse
+import com.alesyastea.ecotrivia.utils.Constants.EMPTY_STRING
+import com.alesyastea.ecotrivia.utils.Constants.ENGLISH_LANGUAGE
+import com.alesyastea.ecotrivia.utils.Constants.RUSSIAN_LANGUAGE
 import com.alesyastea.ecotrivia.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,27 +30,31 @@ class SearchViewModel @Inject constructor(
     val searchNewsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
+    var newSearchQuery:String? = null
+    var oldSearchQuery:String? = null
 
     init {
-        if (Locale.getDefault().language == "ru") {
-            getSearchNews("", "ru")
+        if (Locale.getDefault().language == RUSSIAN_LANGUAGE) {
+            getSearchNews(EMPTY_STRING, RUSSIAN_LANGUAGE)
         } else {
-            getSearchNews("", "en")
+            getSearchNews(EMPTY_STRING, ENGLISH_LANGUAGE)
         }
     }
 
     fun getSearchNews(query: String, language: String) =
         viewModelScope.launch {
-            safeSeachNewsCall(query, language)
+            safeSearchNewsCall(query, language)
         }
 
     private fun handleSearchNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
         if (response.isSuccessful) {
             response.body().let { res ->
-                searchNewsPage++
-                if (searchNewsResponse == null) {
+                if(searchNewsResponse == null || newSearchQuery != oldSearchQuery) {
+                    searchNewsPage = 1
+                    oldSearchQuery = newSearchQuery
                     searchNewsResponse = res
                 } else {
+                    searchNewsPage++
                     val oldArticles = searchNewsResponse?.articles
                     val newArticles = res!!.articles
                     oldArticles?.addAll(newArticles)
@@ -61,7 +65,8 @@ class SearchViewModel @Inject constructor(
         return Resource.Error(response.message())
     }
 
-    private suspend fun safeSeachNewsCall(query: String, language: String) {
+    private suspend fun safeSearchNewsCall(query: String, language: String) {
+        newSearchQuery = query
         searchNewsLiveData.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()) {
@@ -82,26 +87,14 @@ class SearchViewModel @Inject constructor(
         val connectivityManager = getApplication<NewsApp>().getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val activeNetwork = connectivityManager.activeNetwork ?: return false
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-            return when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
-            }
-        } else {
-            connectivityManager.activeNetworkInfo?.run {
-                return when (type) {
-                    ConnectivityManager.TYPE_WIFI -> true
-                    ConnectivityManager.TYPE_MOBILE -> true
-                    ConnectivityManager.TYPE_ETHERNET -> true
-                    else -> false
-                }
-            }
+        val activeNetwork = connectivityManager.activeNetwork ?: return false
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
         }
-        return false
     }
 }
