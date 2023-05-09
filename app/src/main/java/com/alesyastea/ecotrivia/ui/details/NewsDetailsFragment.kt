@@ -15,6 +15,7 @@ import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentNewsDetailsBinding
 import com.alesyastea.ecotrivia.utils.Constants.ARTICLE_URL
 import com.bumptech.glide.Glide
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,6 +27,7 @@ class NewsDetailsFragment : Fragment() {
     private val bundleArgs: NewsDetailsFragmentArgs by navArgs()
     private val viewModel by viewModels<NewsDetailsViewModel>()
     private var isFavorite = false
+    private val firebaseAnalytics by lazy { FirebaseAnalytics.getInstance(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +44,10 @@ class NewsDetailsFragment : Fragment() {
         mBinding.icFavorite.setOnClickListener {
             if (isFavorite) {
                 viewModel.deleteArticle(articleArg)
+                firebaseAnalytics.logEvent("delete_favorite_article", null)
             } else {
                 viewModel.saveFavoriteArticle(articleArg)
+                firebaseAnalytics.logEvent("save_favorite_article", null)
             }
             isFavorite = !isFavorite
             updateFavoriteIcon()

@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:windowFullscreen">true</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="TvBig">

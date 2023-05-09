@@ -22,6 +22,7 @@ import com.alesyastea.ecotrivia.utils.Constants.QUERY_PAGE_SIZE
 import com.alesyastea.ecotrivia.utils.Constants.RUSSIAN_LANGUAGE
 import com.alesyastea.ecotrivia.utils.Constants.RUSSIAN_REQUEST
 import com.alesyastea.ecotrivia.utils.Resource
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -31,9 +32,9 @@ class NewsFragment : Fragment() {
 
     private var _binding: FragmentNewsBinding? = null
     private val mBinding get() = _binding!!
-
     private val viewModel by viewModels<NewsViewModel>()
     lateinit var newsAdapter: NewsAdapter
+    private val firebaseAnalytics by lazy { FirebaseAnalytics.getInstance(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +54,7 @@ class NewsFragment : Fragment() {
                 R.id.action_newsFragment_to_newsDetailsFragment,
                 bundle
             )
+            firebaseAnalytics.logEvent("click_search_news", bundleOf("article_title" to it.title))
         }
 
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer { response ->
@@ -84,6 +86,7 @@ class NewsFragment : Fragment() {
 
         mBinding.btnRetry.setOnClickListener {
             viewModel.getSearchNews(ENGLISH_REQUEST, ENGLISH_LANGUAGE)
+            firebaseAnalytics.logEvent("btn_retry", null)
         }
     }
 

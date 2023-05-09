@@ -22,6 +22,7 @@ import com.alesyastea.ecotrivia.utils.Constants
 import com.alesyastea.ecotrivia.utils.Constants.ENGLISH_LANGUAGE
 import com.alesyastea.ecotrivia.utils.Constants.RUSSIAN_LANGUAGE
 import com.alesyastea.ecotrivia.utils.Resource
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -35,10 +36,9 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val mBinding get() = _binding!!
-
     private val viewModel by viewModels<SearchViewModel>()
     lateinit var newsAdapter: NewsAdapter
-
+    private val firebaseAnalytics by lazy { FirebaseAnalytics.getInstance(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +64,7 @@ class SearchFragment : Fragment() {
                         } else {
                             viewModel.getSearchNews(query = it.toString(), language = ENGLISH_LANGUAGE)
                         }
+                        firebaseAnalytics.logEvent("search", bundleOf("query" to text.toString()))
                     }
                 }
             }
@@ -75,6 +76,7 @@ class SearchFragment : Fragment() {
                 R.id.action_searchFragment_to_newsDetailsFragment,
                 bundle
             )
+            firebaseAnalytics.logEvent("click_search_news", bundleOf("article_title" to it.title))
         }
 
 
@@ -104,6 +106,7 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+
         mBinding.btnRetry.setOnClickListener {
             if (mBinding.etSearch.text.toString().isNotEmpty()) {
                 viewModel.getSearchNews(mBinding.etSearch.text.toString(), ENGLISH_LANGUAGE)
@@ -118,6 +121,7 @@ class SearchFragment : Fragment() {
         isLoading = false
     }
     private fun showProgressBar() {
+        firebaseAnalytics.logEvent("load_news_list", null)
         mBinding.progressBar.visibility = View.VISIBLE
         isLoading = true
     }

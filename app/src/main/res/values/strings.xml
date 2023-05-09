@@ -11,7 +11,7 @@
     <string name="delete_article">Successfully deleted article</string>
     <string name="undo">Undo</string>
     <string name="battery_text">&#160;%1$d%% battery remaining</string>
-    <string name="no_internet">Slow or no Internet connection.\nPlease, check your Internet settings</string>
+    <string name="no_internet">Poor or no Internet connection.\nPlease, check your Internet settings</string>
     <string name="retry">Retry</string>
     <string name="oops">Ooops!</string>
     <string name="news_image">news image</string>

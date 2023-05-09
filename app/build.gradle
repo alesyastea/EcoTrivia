@@ -4,6 +4,9 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.firebase-perf'
 }
 
 android {
@@ -87,5 +90,18 @@ dependencies {
 
     // Work Manager
     implementation "androidx.work:work-runtime-ktx:2.8.1"
+
+    // BoM for the Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+
+    // Crashlytics and Analytics libraries
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Performance Monitoring
+    implementation 'com.google.firebase:firebase-perf-ktx'
+
+    // Remote Config
+    implementation 'com.google.firebase:firebase-config'
 
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462014479535",
+    "project_id": "ecotrivia-43b6b",
+    "storage_bucket": "ecotrivia-43b6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462014479535:android:f869f4ed9c9eb70a81a85a",
+        "android_client_info": {
+          "package_name": "com.alesyastea.ecotrivia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462014479535-9i17vjkbcf8kei7itg5u0jdvecpktq1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLPlk3L4qDjCYFsxaQTMgQL7JFpxD5kgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462014479535-9i17vjkbcf8kei7itg5u0jdvecpktq1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,6 +16,7 @@ import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentFavoriteBinding
 import com.alesyastea.ecotrivia.ui.adapters.NewsAdapter
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,9 +25,10 @@ class FavoriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val mBinding get() = _binding!!
-
     private val viewModel by viewModels<FavoriteViewModel>()
     lateinit var newsAdapter: NewsAdapter
+    private val firebaseAnalytics by lazy { FirebaseAnalytics.getInstance(requireContext()) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,8 +40,14 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        firebaseAnalytics.logEvent("favorite_fragment_opened", null)
+
 
         newsAdapter.setOnItemClickListener {
+            val bundleFB = Bundle()
+            bundleFB.putString(FirebaseAnalytics.Param.ITEM_NAME, it.title)
+            firebaseAnalytics.logEvent("article_clicked", bundleFB)
+
             val bundle = bundleOf("article" to it)
             view.findNavController().navigate(
                 R.id.action_favoriteFragment_to_newsDetailsFragment,
@@ -69,6 +77,9 @@ class FavoriteFragment : Fragment() {
                     }
                     show()
                 }
+                val bundle = Bundle()
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, article.title)
+                firebaseAnalytics.logEvent("article_deleted", bundle)
             }
 
         }
