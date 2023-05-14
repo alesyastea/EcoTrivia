@@ -19,6 +19,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -103,5 +104,9 @@ dependencies {
 
     // Remote Config
     implementation 'com.google.firebase:firebase-config'
+
+    // Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 }

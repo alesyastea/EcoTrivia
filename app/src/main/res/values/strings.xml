@@ -17,4 +17,6 @@
     <string name="news_image">news image</string>
     <string name="arrow_back">arrow back</string>
     <string name="add_to_favorite">add to favorite</string>
+    <string name="quiz">Quiz</string>
+    <string name="take_quiz">take quiz</string>
 </resources>

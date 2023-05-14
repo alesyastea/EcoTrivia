@@ -14,7 +14,9 @@
     <string name="no_internet">Отсутсвует подключение к Интернету.\nПожалуйста, проверьте настройки подключения</string>
     <string name="retry">Повторить</string>
     <string name="oops">Ой!</string>
-    <string name="news_image">news image</string>
-    <string name="arrow_back">arrow back</string>
-    <string name="add_to_favorite">add to favorite</string>
+    <string name="news_image">обложка новостей</string>
+    <string name="arrow_back">назад</string>
+    <string name="add_to_favorite">Добавить в избранное</string>
+    <string name="quiz">Тесты</string>
+    <string name="take_quiz">пройти тест</string>
 </resources>

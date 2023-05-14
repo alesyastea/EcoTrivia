@@ -62,4 +62,44 @@
             android:id="@+id/action_splashFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/startQuizFragment"
+        android:name="com.alesyastea.ecotrivia.ui.startQuiz.StartQuizFragment"
+        android:label="fragment_start_quiz"
+        tools:layout="@layout/fragment_start_quiz" >
+        <action
+            android:id="@+id/action_startQuizFragment_to_detailsQuizFragment"
+            app:destination="@id/detailsQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsQuizFragment"
+        android:name="com.alesyastea.ecotrivia.ui.detailsQuiz.DetailsQuizFragment"
+        android:label="fragment_details_quiz"
+        tools:layout="@layout/fragment_details_quiz" >
+        <action
+            android:id="@+id/action_detailsQuizFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+        <argument
+            android:name="Position"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.alesyastea.ecotrivia.ui.quiz.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_resultQuizFragment"
+            app:destination="@id/resultQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultQuizFragment"
+        android:name="com.alesyastea.ecotrivia.ui.resultQuiz.ResultQuizFragment"
+        android:label="fragment_result_quiz"
+        tools:layout="@layout/fragment_result_quiz" >
+        <action
+            android:id="@+id/action_resultQuizFragment_to_startQuizFragment"
+            app:destination="@id/startQuizFragment" />
+    </fragment>
 </navigation>

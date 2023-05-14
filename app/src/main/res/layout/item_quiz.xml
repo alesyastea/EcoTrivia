@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="12dp"
+    android:background="@drawable/bg_image_10">
+
+    <ImageView
+        android:id="@+id/quiz_img"
+        android:layout_width="match_parent"
+        android:layout_height="172dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_image_10"
+        android:contentDescription="@string/news_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/quiz_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/quiz_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_img">
+
+        <TextView
+            android:id="@+id/quiz_name"
+            style="@style/TvBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            tools:text="EcoQuiz" />
+
+        <TextView
+            android:id="@+id/quiz_description"
+            style="@style/TvMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:textColor="@color/white"
+            tools:text="Taking care of the earth isn’t all fun and games, but it can be sometimes. This eco-quiz is equal parts entertaining and educational. So test your knowledge and see just how much you know — scroll past the photos to get each answer, and if a particular topic piques your interest, read more by following the “get more information” link after each question. Good luck!" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/quiz_level"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_container"
+        tools:text="Beginner" />
+
+    <Button
+        android:id="@+id/btn_take_quiz"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/woodland"
+        android:text="@string/take_quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_container" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
