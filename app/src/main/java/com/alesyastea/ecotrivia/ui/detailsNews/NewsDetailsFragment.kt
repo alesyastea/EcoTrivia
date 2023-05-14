@@ -1,4 +1,4 @@
-package com.alesyastea.ecotrivia.ui.details
+package com.alesyastea.ecotrivia.ui.detailsNews
 
 import android.content.Intent
 import android.net.Uri

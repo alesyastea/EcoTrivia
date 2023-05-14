@@ -1,4 +1,4 @@
-package com.alesyastea.ecotrivia.ui.details
+package com.alesyastea.ecotrivia.ui.detailsNews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

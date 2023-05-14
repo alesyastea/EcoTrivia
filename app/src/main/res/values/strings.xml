@@ -19,4 +19,6 @@
     <string name="add_to_favorite">add to favorite</string>
     <string name="quiz">Quiz</string>
     <string name="take_quiz">take quiz</string>
+    <string name="level">Level</string>
+    <string name="questions">Questions</string>
 </resources>

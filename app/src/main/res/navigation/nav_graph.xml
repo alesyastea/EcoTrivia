@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsDetailsFragment"
-        android:name="com.alesyastea.ecotrivia.ui.details.NewsDetailsFragment"
+        android:name="com.alesyastea.ecotrivia.ui.detailsNews.NewsDetailsFragment"
         android:label="fragment_news_details"
         tools:layout="@layout/fragment_news_details" >
         <argument
@@ -80,9 +80,8 @@
             android:id="@+id/action_detailsQuizFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
         <argument
-            android:name="Position"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="quiz"
+            app:argType="com.alesyastea.ecotrivia.models.QuizModel" />
     </fragment>
     <fragment
         android:id="@+id/quizFragment"

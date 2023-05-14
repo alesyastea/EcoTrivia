@@ -19,4 +19,6 @@
     <string name="add_to_favorite">Добавить в избранное</string>
     <string name="quiz">Тесты</string>
     <string name="take_quiz">пройти тест</string>
+    <string name="level">Уровень сложности</string>
+    <string name="questions">Количество</string>
 </resources>

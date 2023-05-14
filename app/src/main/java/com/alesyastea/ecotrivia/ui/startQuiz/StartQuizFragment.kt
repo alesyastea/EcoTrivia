@@ -43,13 +43,16 @@ class StartQuizFragment : Fragment() {
 
         viewModel.getLiveDataFromFireStore().observe(viewLifecycleOwner, Observer { quizModels ->
             quizAdapter.differ.submitList(quizModels)
+            hideProgressBar()
         })
+        showProgressBar()
     }
 
     private fun hideProgressBar() {
         mBinding.progressBar.visibility = View.INVISIBLE
         isLoading = false
     }
+
     private fun showProgressBar() {
         mBinding.progressBar.visibility = View.VISIBLE
         isLoading = true
