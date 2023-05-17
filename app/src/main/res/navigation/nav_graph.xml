@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_quizFragment_to_resultQuizFragment"
             app:destination="@id/resultQuizFragment" />
+        <argument
+            android:name="quiz"
+            app:argType="com.alesyastea.ecotrivia.models.QuizModel" />
     </fragment>
     <fragment
         android:id="@+id/resultQuizFragment"

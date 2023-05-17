@@ -6,16 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentDetailsQuizBinding
-import com.alesyastea.ecotrivia.databinding.FragmentNewsDetailsBinding
-import com.alesyastea.ecotrivia.ui.detailsNews.NewsDetailsFragmentArgs
-import com.alesyastea.ecotrivia.ui.detailsNews.NewsDetailsViewModel
 import com.bumptech.glide.Glide
 
 
@@ -53,7 +48,7 @@ class DetailsQuizFragment : Fragment() {
         }
 
         mBinding.btnTakeQuiz.setOnClickListener {
-            val bundle = bundleOf("quiz" to it)
+            val bundle = bundleOf("quiz" to quizArgs)
             view.findNavController().navigate(
                 R.id.action_detailsQuizFragment_to_quizFragment,
                 bundle

@@ -21,4 +21,11 @@
     <string name="take_quiz">пройти тест</string>
     <string name="level">Уровень сложности</string>
     <string name="questions">Количество</string>
+    <string name="loading_quiz">Loading Quiz</string>
+    <string name="loading_question">Loading Question</string>
+    <string name="next">Next</string>
+    <string name="go_to_results">Go to Results</string>
+    <string name="correct_answer">Answer is Correct</string>
+    <string name="incorrect_ancwer">Answer is incorrect</string>
+    <string name="time_is_up">Time is up</string>
 </resources>

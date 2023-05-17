@@ -11,4 +11,6 @@ object Constants {
     const val RUSSIAN_REQUEST = "экология"
     const val ENGLISH_REQUEST = "ecology"
     const val EMPTY_STRING = ""
+    const val QUIZ_LIST = "QuizList"
+    const val QUESTIONS = "Questions"
 }

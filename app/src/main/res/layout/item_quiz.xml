@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="12dp"
-    android:background="@drawable/bg_image_10">
+    android:background="@drawable/bg_image_10_quiz">
 
     <ImageView
         android:id="@+id/quiz_img"
         android:layout_width="match_parent"
         android:layout_height="172dp"
         android:layout_margin="8dp"
-        android:background="@drawable/bg_image_10"
+        android:background="@drawable/bg_image_10_quiz"
         android:contentDescription="@string/news_image"
         android:scaleType="centerCrop"
         android:src="@drawable/quiz_placeholder"

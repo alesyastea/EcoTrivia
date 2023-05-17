@@ -1,13 +1,14 @@
 package com.alesyastea.ecotrivia.data.api
 
 import com.alesyastea.ecotrivia.models.QuizModel
+import com.alesyastea.ecotrivia.utils.Constants.QUIZ_LIST
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class QuizRepository(private val fireStoreDataAdded: OnFireStoreDataAdded) {
 
     private val fireStore = FirebaseFirestore.getInstance()
-    private val quizRef: Query = fireStore.collection("QuizList")
+    private val quizRef: Query = fireStore.collection(QUIZ_LIST)
 
     fun getDataFromFireStore() {
         quizRef.get().addOnCompleteListener { task ->
