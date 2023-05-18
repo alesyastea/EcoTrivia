@@ -55,6 +55,10 @@ class QuizAdapter: RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
             setOnClickListener {
                 onItemClickListener?.let { it(quiz) }
             }
+
+            binding.btnTakeQuiz.setOnClickListener {
+                onTakeQuizClickListener?.let { it(quiz) }
+            }
         }
     }
 
@@ -66,5 +70,11 @@ class QuizAdapter: RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
 
     fun setOnItemClickListener(listener: (QuizModel) -> Unit) {
         onItemClickListener = listener
+    }
+
+    private var onTakeQuizClickListener: ((QuizModel) -> Unit)? = null
+
+    fun setOnTakeQuizClickListener(listener: (QuizModel) -> Unit) {
+        onTakeQuizClickListener = listener
     }
 }

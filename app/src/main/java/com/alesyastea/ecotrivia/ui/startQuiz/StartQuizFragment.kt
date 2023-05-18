@@ -42,6 +42,14 @@ class StartQuizFragment : Fragment() {
             )
         }
 
+        quizAdapter.setOnTakeQuizClickListener {
+            val bundle = bundleOf(QUIZ_KEY to it)
+            view.findNavController().navigate(
+                R.id.action_startQuizFragment_to_quizFragment,
+                bundle
+            )
+        }
+
         viewModel.getLiveDataFromFireStore().observe(viewLifecycleOwner, Observer { quizModels ->
             quizAdapter.differ.submitList(quizModels)
             hideProgressBar()
