@@ -1,9 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/asparagus"
     tools:context=".ui.resultQuiz.ResultQuizFragment">
 
+    <TextView
+        android:id="@+id/tv_result"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="48dp"
+        android:text="@string/result"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="32dp"
+        android:progress="100"
+        android:progressDrawable="@drawable/circular_progress"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_result" />
+
+    <TextView
+        android:id="@+id/tv_percent"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/progress_bar"
+        app:layout_constraintStart_toStartOf="@id/progress_bar"
+        app:layout_constraintTop_toTopOf="@id/progress_bar"
+        tools:text="100%" />
+
+    <TextView
+        android:id="@+id/tv_correct_answers"
+        style="@style/TvMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="38dp"
+        android:text="@string/correct_answers"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+
+    <TextView
+        android:id="@+id/quiz_correct_answers"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_correct_answers"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tv_wrong_answers"
+        style="@style/TvMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/wrong_answers"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_correct_answers" />
+
+    <TextView
+        android:id="@+id/quiz_wrong_answers"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_wrong_answers"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/tv_missed_questions"
+        style="@style/TvMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/missed_questions"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_wrong_answers" />
+
+    <TextView
+        android:id="@+id/quiz_missed_questions"
+        style="@style/TvBig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_missed_questions"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="0" />
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginVertical="14dp"
+        android:background="@drawable/primary_button_bg"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/go_to_home"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_missed_questions" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

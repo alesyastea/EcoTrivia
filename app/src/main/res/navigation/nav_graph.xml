@@ -103,5 +103,8 @@
         <action
             android:id="@+id/action_resultQuizFragment_to_startQuizFragment"
             app:destination="@id/startQuizFragment" />
+        <argument
+            android:name="quiz"
+            app:argType="com.alesyastea.ecotrivia.models.QuizModel" />
     </fragment>
 </navigation>

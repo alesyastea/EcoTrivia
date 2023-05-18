@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alesyastea.ecotrivia.R
@@ -31,6 +33,7 @@ class QuizFragment : Fragment() {
     private var missedAnswer: Int = 0
     private var currentQuestion: Int = 0
     private var canAnswer: Boolean = false
+    private lateinit var navController: NavController
     private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreateView(
@@ -44,6 +47,7 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val quizArgs = bundleArgs.quiz
+        navController = Navigation.findNavController(view)
 
         mBinding.arrowBack.setOnClickListener {
             findNavController().navigateUp()
@@ -73,7 +77,7 @@ class QuizFragment : Fragment() {
         }
         mBinding.btnNext.setOnClickListener {
             if (currentQuestion == quizArgs.question.toInt()) {
-                Toast.makeText(context, "End", Toast.LENGTH_SHORT).show()
+                submitResult()
             } else {
                 currentQuestion++
                 loadQuestion(currentQuestion)
@@ -163,6 +167,7 @@ class QuizFragment : Fragment() {
     private fun verifyAnswer(selectedButton: Button) {
         if (canAnswer) {
             selectedButton.setTextColor(resources.getColor(R.color.white, null))
+            selectedButton.setBackgroundResource(R.drawable.primary_button_bg)
             if (questionToAnswer[currentQuestion - 1].answer == selectedButton.text) {
                 correctAnswer++
                 selectedButton.setBackgroundColor(resources.getColor(R.color.woodland, null))
@@ -178,6 +183,28 @@ class QuizFragment : Fragment() {
             countDownTimer.cancel()
             showNextButton()
         }
+    }
+
+    private fun submitResult() {
+        val hashMap = HashMap<String, Any>()
+
+        hashMap["correct"] = correctAnswer
+        hashMap["wrong"] = wrongAnswer
+        hashMap["missed"] = missedAnswer
+
+        FirebaseFirestore.getInstance().collection("QuizList")
+            .document(bundleArgs.quiz.quizId)
+            .collection("Results")
+            .document()
+            .set(hashMap)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val bundle = bundleOf("quiz" to bundleArgs.quiz)
+                    navController.navigate(R.id.action_quizFragment_to_resultQuizFragment, bundle)
+                } else {
+                    mBinding.tvFeedback.text = task.exception.toString()
+                }
+            }
     }
 
     private fun showNextButton() {

@@ -23,9 +23,14 @@
     <string name="questions">Questions</string>
     <string name="loading_quiz">Loading Quiz</string>
     <string name="loading_question">Loading Question</string>
-    <string name="next">Next</string>
-    <string name="go_to_results">Go to Results</string>
+    <string name="next">next</string>
+    <string name="go_to_results">go to results</string>
     <string name="correct_answer">Answer is Correct</string>
     <string name="incorrect_ancwer">Answer is incorrect</string>
     <string name="time_is_up">Time is up</string>
+    <string name="result">Result</string>
+    <string name="correct_answers">Correct answers</string>
+    <string name="wrong_answers">Wrong answers</string>
+    <string name="missed_questions">Missed questions</string>
+    <string name="go_to_home">go to home</string>
 </resources>
