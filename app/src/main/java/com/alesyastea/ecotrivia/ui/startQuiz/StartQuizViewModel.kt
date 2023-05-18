@@ -7,7 +7,7 @@ import com.alesyastea.ecotrivia.models.QuizModel
 
 class StartQuizViewModel: ViewModel(), QuizRepository.OnFireStoreDataAdded {
 
-    val startQuizLiveData: MutableLiveData<List<QuizModel>> = MutableLiveData()
+    private val startQuizLiveData: MutableLiveData<List<QuizModel>> = MutableLiveData()
     private val quizRepository = QuizRepository(this)
 
     init {

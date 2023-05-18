@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentStartQuizBinding
 import com.alesyastea.ecotrivia.ui.adapters.QuizAdapter
+import com.alesyastea.ecotrivia.utils.Constants.QUIZ_KEY
 
 class StartQuizFragment : Fragment() {
 
@@ -34,7 +35,7 @@ class StartQuizFragment : Fragment() {
         initAdapter()
 
         quizAdapter.setOnItemClickListener {
-            val bundle = bundleOf("quiz" to it)
+            val bundle = bundleOf(QUIZ_KEY to it)
             view.findNavController().navigate(
                 R.id.action_startQuizFragment_to_detailsQuizFragment,
                 bundle

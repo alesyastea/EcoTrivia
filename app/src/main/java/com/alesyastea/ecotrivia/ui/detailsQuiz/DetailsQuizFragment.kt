@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentDetailsQuizBinding
+import com.alesyastea.ecotrivia.utils.Constants.QUIZ_KEY
 import com.bumptech.glide.Glide
 
 
@@ -48,7 +49,7 @@ class DetailsQuizFragment : Fragment() {
         }
 
         mBinding.btnTakeQuiz.setOnClickListener {
-            val bundle = bundleOf("quiz" to quizArgs)
+            val bundle = bundleOf(QUIZ_KEY to quizArgs)
             view.findNavController().navigate(
                 R.id.action_detailsQuizFragment_to_quizFragment,
                 bundle

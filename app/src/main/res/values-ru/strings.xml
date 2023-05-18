@@ -11,7 +11,7 @@
     <string name="delete_article">Статья успешно удалена</string>
     <string name="undo">Отменить</string>
     <string name="battery_text">&#160;%1$d%% оставшийся заряд батареи</string>
-    <string name="no_internet">Отсутсвует подключение к Интернету.\nПожалуйста, проверьте настройки подключения</string>
+    <string name="no_internet">Отсутствует подключение к Интернету.\nПожалуйста, проверьте настройки подключения</string>
     <string name="retry">Повторить</string>
     <string name="oops">Ой!</string>
     <string name="news_image">обложка новостей</string>
@@ -21,16 +21,16 @@
     <string name="take_quiz">пройти тест</string>
     <string name="level">Уровень сложности</string>
     <string name="questions">Количество</string>
-    <string name="loading_quiz">Loading Quiz</string>
-    <string name="loading_question">Loading Question</string>
-    <string name="next">Next</string>
-    <string name="go_to_results">Go to Results</string>
-    <string name="correct_answer">Answer is Correct</string>
-    <string name="incorrect_ancwer">Answer is incorrect</string>
-    <string name="time_is_up">Time is up</string>
-    <string name="result">Result</string>
-    <string name="correct_answers">Correct answers</string>
-    <string name="wrong_answers">Wrong answers</string>
-    <string name="missed_questions">Missed questions</string>
-    <string name="go_to_home">go to home</string>
+    <string name="loading_quiz">Загружаем викторину</string>
+    <string name="loading_question">Загружаем вопрос</string>
+    <string name="next">следующий</string>
+    <string name="go_to_results">перейти к результатам</string>
+    <string name="correct_answer">Ответ верен</string>
+    <string name="incorrect_ancwer">Ответ неверен</string>
+    <string name="time_is_up">Время истекло</string>
+    <string name="result">Результаты</string>
+    <string name="correct_answers">Верные ответы</string>
+    <string name="wrong_answers">Неверные ответы</string>
+    <string name="missed_questions">Пропущенные вопросы</string>
+    <string name="go_to_home">перейти на главную страницу</string>
 </resources>

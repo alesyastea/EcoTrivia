@@ -1,6 +1,8 @@
 package com.alesyastea.ecotrivia.ui.quiz
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -16,8 +18,13 @@ import androidx.navigation.fragment.navArgs
 import com.alesyastea.ecotrivia.R
 import com.alesyastea.ecotrivia.databinding.FragmentQuizBinding
 import com.alesyastea.ecotrivia.models.QuestionModel
+import com.alesyastea.ecotrivia.utils.Constants.CORRECT_KEY
+import com.alesyastea.ecotrivia.utils.Constants.MISSED_KEY
 import com.alesyastea.ecotrivia.utils.Constants.QUESTIONS
+import com.alesyastea.ecotrivia.utils.Constants.QUIZ_KEY
 import com.alesyastea.ecotrivia.utils.Constants.QUIZ_LIST
+import com.alesyastea.ecotrivia.utils.Constants.QUIZ_RESULTS
+import com.alesyastea.ecotrivia.utils.Constants.WRONG_KEY
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
@@ -35,6 +42,8 @@ class QuizFragment : Fragment() {
     private var canAnswer: Boolean = false
     private lateinit var navController: NavController
     private lateinit var countDownTimer: CountDownTimer
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +57,10 @@ class QuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val quizArgs = bundleArgs.quiz
         navController = Navigation.findNavController(view)
+
+        sharedPreferences =
+            requireActivity().getSharedPreferences(QUIZ_RESULTS, Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
         mBinding.arrowBack.setOnClickListener {
             findNavController().navigateUp()
@@ -131,7 +144,7 @@ class QuizFragment : Fragment() {
             override fun onFinish() {
                 canAnswer = false
                 mBinding.tvFeedback.text = getString(R.string.time_is_up)
-                mBinding.tvFeedback.setTextColor(resources.getColor(R.color.flamingo, null))
+                mBinding.tvFeedback.setTextColor(resources.getColor(R.color.cowboy, null))
                 missedAnswer++
                 showNextButton()
             }
@@ -186,25 +199,12 @@ class QuizFragment : Fragment() {
     }
 
     private fun submitResult() {
-        val hashMap = HashMap<String, Any>()
-
-        hashMap["correct"] = correctAnswer
-        hashMap["wrong"] = wrongAnswer
-        hashMap["missed"] = missedAnswer
-
-        FirebaseFirestore.getInstance().collection("QuizList")
-            .document(bundleArgs.quiz.quizId)
-            .collection("Results")
-            .document()
-            .set(hashMap)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val bundle = bundleOf("quiz" to bundleArgs.quiz)
-                    navController.navigate(R.id.action_quizFragment_to_resultQuizFragment, bundle)
-                } else {
-                    mBinding.tvFeedback.text = task.exception.toString()
-                }
-            }
+        editor.putInt(CORRECT_KEY, correctAnswer)
+        editor.putInt(WRONG_KEY, wrongAnswer)
+        editor.putInt(MISSED_KEY, missedAnswer)
+        editor.apply()
+        val bundle = bundleOf(QUIZ_KEY to bundleArgs.quiz)
+        navController.navigate(R.id.action_quizFragment_to_resultQuizFragment, bundle)
     }
 
     private fun showNextButton() {

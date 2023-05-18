@@ -13,4 +13,9 @@ object Constants {
     const val EMPTY_STRING = ""
     const val QUIZ_LIST = "QuizList"
     const val QUESTIONS = "Questions"
+    const val CORRECT_KEY = "correct"
+    const val WRONG_KEY = "wrong"
+    const val MISSED_KEY = "missed"
+    const val QUIZ_KEY = "quiz"
+    const val QUIZ_RESULTS = "QuizResults"
 }
