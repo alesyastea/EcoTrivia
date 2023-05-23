@@ -1,4 +1,4 @@
-package com.alesyastea.ecotrivia
+package com.alesyastea.ecotrivia.ui.battery
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
@@ -10,6 +10,7 @@ import android.os.BatteryManager
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.alesyastea.ecotrivia.R
 import com.google.android.material.snackbar.Snackbar
 
 class BatteryReceiver(private val root: View, private val context: Context) : BroadcastReceiver() {

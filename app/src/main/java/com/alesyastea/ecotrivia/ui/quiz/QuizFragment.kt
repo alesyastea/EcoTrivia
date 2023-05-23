@@ -141,10 +141,13 @@ class QuizFragment : Fragment() {
                 mBinding.progressBar.progress = percent.toInt()
             }
 
+            val activity = requireActivity()
             override fun onFinish() {
                 canAnswer = false
-                mBinding.tvFeedback.text = getString(R.string.time_is_up)
-                mBinding.tvFeedback.setTextColor(resources.getColor(R.color.cowboy, null))
+                activity.runOnUiThread {
+                    mBinding.tvFeedback.text = activity.getString(R.string.time_is_up)
+                    mBinding.tvFeedback.setTextColor(activity.resources.getColor(R.color.cowboy, null))
+                }
                 missedAnswer++
                 showNextButton()
             }
